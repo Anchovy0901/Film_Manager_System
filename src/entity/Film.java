@@ -14,4 +14,9 @@ public class Film {
      * 电影名称
      */
     private String name;
+
+    /**
+     * 电影类型
+     */
+    private String category;
 }

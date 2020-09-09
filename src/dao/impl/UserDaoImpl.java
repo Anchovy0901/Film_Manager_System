@@ -36,7 +36,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public Boolean register(User user) {
+    public void register(User user) {
         Connection connection = null;
         try {
             String sql = "insert into f_user (username, `name`, sex, `password`, phone, email, address) values (?,?,?,?,?,?,?)";
@@ -49,8 +49,24 @@ public class UserDaoImpl implements UserDao {
             preparedStatement.setString(5, user.getPhone());
             preparedStatement.setString(6, user.getEmail());
             preparedStatement.setString(7, user.getAddress());
-            Boolean flg = preparedStatement.execute();
-            if(flg){
+            preparedStatement.execute();
+
+            preparedStatement.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    @Override
+    public Boolean forgetQuery(String username, String phone) {
+        Connection connection = null;
+        try {
+            String sql = "select * from f_user where username = ? and phone = ?";
+            PreparedStatement preparedStatement = ConnectionUtils.getConnect(connection).prepareStatement(sql);
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, phone);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
                 return true;
             }
             preparedStatement.close();
@@ -58,5 +74,38 @@ public class UserDaoImpl implements UserDao {
             throwables.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public void forgetUpdate(String username, String password) {
+        Connection connection = null;
+        try {
+            String sql = "update f_user set `password`=? where username=?";
+            PreparedStatement preparedStatement = ConnectionUtils.getConnect(connection).prepareStatement(sql);
+            preparedStatement.setString(1, password);
+            preparedStatement.setString(2, username);
+            preparedStatement.execute();
+            preparedStatement.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    @Override
+    public Boolean usernameQuery(String username) {
+        Connection connection = null;
+        try {
+            String sql = "select * from f_user where username = ?";
+            PreparedStatement preparedStatement = ConnectionUtils.getConnect(connection).prepareStatement(sql);
+            preparedStatement.setString(1, username);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                return false;
+            }
+            preparedStatement.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return true;
     }
 }

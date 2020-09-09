@@ -29,4 +29,9 @@ public class Awards {
      * 举办地点
      */
     private String site;
+
+    /**
+     * 演员编号
+     */
+    private Integer actorId;
 }

@@ -5,9 +5,10 @@
 package ui;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 
 import dao.UserDao;
 import dao.impl.UserDaoImpl;
@@ -36,6 +37,8 @@ public class Login {
         radioButton2 = new JRadioButton();
         login = new JButton();
         buttonGroup = new ButtonGroup();
+        role = null;
+        forget = new JLabel();
 
         //======== ll ========
         {
@@ -56,6 +59,12 @@ public class Login {
             username.setBounds(100, 55, 165, username.getPreferredSize().height);
             llContentPane.add(password);
             password.setBounds(100, 115, 165, password.getPreferredSize().height);
+
+            //----- forget ------
+            forget.setText("忘记密码");
+            llContentPane.add(forget);
+            forget.setBounds(new Rectangle(new Point(245, 143), l2.getPreferredSize()));
+            forget.setSize(60, 20);
 
             //---- register ----
             register.setText("\u6ce8\u518c");
@@ -89,10 +98,10 @@ public class Login {
                 }
             });
 
-            radioButton1.addActionListener(new ActionListener() {
+            radioButton2.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    role = true; //管理员
+                    role = false; //管理员
                 }
             });
 
@@ -115,8 +124,22 @@ public class Login {
                         JOptionPane.showMessageDialog(null, "登录失败");
                         return;
                     }
-
+                    if(username.getText().equals("admin")){
+                        new AdminHomePage();
+                        ll.dispose();
+                    }else{
+                        new UserHomePage();
+                        ll.dispose();
+                    }
                    ll.dispose();
+                }
+            });
+
+            forget.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent event){
+                    new Forget();
+                    ll.dispose();
                 }
             });
 
@@ -165,6 +188,7 @@ public class Login {
     private ButtonGroup buttonGroup;
     private JButton login;
     private Boolean role;
+    private JLabel forget;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
 }

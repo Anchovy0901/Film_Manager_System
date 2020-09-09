@@ -11,7 +11,7 @@
  Target Server Version : 50731
  File Encoding         : 65001
 
- Date: 09/09/2020 11:24:46
+ Date: 09/09/2020 16:38:09
 */
 
 SET NAMES utf8mb4;
@@ -41,7 +41,12 @@ CREATE TABLE `f_admin`  (
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '密码',
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '管理员名称',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '管理员信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '管理员信息表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of f_admin
+-- ----------------------------
+INSERT INTO `f_admin` VALUES (1, 'admin', 'admin', '王五');
 
 -- ----------------------------
 -- Table structure for f_awards
@@ -53,7 +58,10 @@ CREATE TABLE `f_awards`  (
   `periods` int(11) NULL DEFAULT NULL COMMENT '期数',
   `year` int(11) NULL DEFAULT NULL COMMENT '获奖年份',
   `site` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '举办地点',
-  PRIMARY KEY (`id`) USING BTREE
+  `actor_id` int(11) NULL DEFAULT NULL COMMENT '演员编号',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `actor_id`(`actor_id`) USING BTREE,
+  CONSTRAINT `f_awards_ibfk_1` FOREIGN KEY (`actor_id`) REFERENCES `f_actor` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '奖项信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -118,6 +126,7 @@ DROP TABLE IF EXISTS `f_film`;
 CREATE TABLE `f_film`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '电影编号',
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '电影名称',
+  `category` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '电影类型',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '电影表' ROW_FORMAT = Dynamic;
 
@@ -186,14 +195,11 @@ DROP TABLE IF EXISTS `f_palms`;
 CREATE TABLE `f_palms`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '记录编号',
   `actor_id` int(11) NULL DEFAULT NULL COMMENT '演员编号',
-  `award_id` int(11) NULL DEFAULT NULL COMMENT '奖励编号',
   `category` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '获奖类别',
   `level` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '获奖级别',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `actor_id`(`actor_id`) USING BTREE,
-  INDEX `award_id`(`award_id`) USING BTREE,
-  CONSTRAINT `f_palms_ibfk_1` FOREIGN KEY (`actor_id`) REFERENCES `f_actor` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `f_palms_ibfk_2` FOREIGN KEY (`award_id`) REFERENCES `f_awards` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `f_palms_ibfk_1` FOREIGN KEY (`actor_id`) REFERENCES `f_actor` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '获奖记录表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -226,8 +232,12 @@ CREATE TABLE `f_user`  (
   `phone` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '手机号',
   `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '邮箱',
   `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '地址',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '注册时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of f_user
+-- ----------------------------
+INSERT INTO `f_user` VALUES (1, '123456', '赵六', '男', '123456', '17636399759', '48648478@qq.com', '海淀区');
 
 SET FOREIGN_KEY_CHECKS = 1;

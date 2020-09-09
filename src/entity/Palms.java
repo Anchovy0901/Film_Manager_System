@@ -16,11 +16,6 @@ public class Palms {
     private Integer actorId;
 
     /**
-     * ½±Àø±àºÅ
-     */
-    private Integer awardId;
-
-    /**
      * »ñ½±Àà±ð
      */
     private String category;

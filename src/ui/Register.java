@@ -5,6 +5,7 @@
 package ui;
 
 import com.mysql.cj.x.protobuf.MysqlxDatatypes;
+import dao.UserDao;
 import dao.impl.UserDaoImpl;
 import entity.User;
 
@@ -41,6 +42,7 @@ public class Register {
         register = new JButton();
         buttonGroup = new ButtonGroup();
         jFrame = new JFrame();
+        sexFlg = null;
 
         //======== this ========
         jFrame.setTitle("register");
@@ -113,7 +115,7 @@ public class Register {
             }
         });
 
-        radioButton1.addActionListener(new ActionListener() {
+        radioButton2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 sexFlg = false; //女
@@ -151,20 +153,23 @@ public class Register {
                     JOptionPane.showMessageDialog(null, "地址不能为空");
                     return;
                 }
+
+                UserDao userDao = new UserDaoImpl();
+                Boolean aBoolean = userDao.usernameQuery(username.getText());
+                if(!aBoolean){
+                    JOptionPane.showMessageDialog(null, "用户名已存在");
+                }
                 User user = new User();
                 user.setUsername(username.getText());
                 user.setName(name.getText());
-                user.setSex(sexFlg == true ?  "男" : "女");
+                user.setSex(sexFlg == true ?  "\u7537" : "\u5973");
                 user.setPassword(new String(password.getPassword()));
                 user.setPhone(phone.getText());
                 user.setEmail(email.getText());
                 user.setAddress(address.getText());
-                Boolean register = new UserDaoImpl().register(user);
-                if(register){
-                    new Login();
-                    jFrame.dispose();
-                }
-                JOptionPane.showMessageDialog(null, "注册失败，请重新注册");
+                userDao.register(user);
+                jFrame.dispose();
+                new Login();
                 return;
             }
         });
