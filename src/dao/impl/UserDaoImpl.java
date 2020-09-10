@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDaoImpl implements UserDao {
 
@@ -107,5 +109,32 @@ public class UserDaoImpl implements UserDao {
             throwables.printStackTrace();
         }
         return true;
+    }
+
+    @Override
+    public List<User> userList() {
+        Connection connection = null;
+        List<User> returnList = new ArrayList<>();
+        try {
+            String sql = "select * from f_user";
+            PreparedStatement preparedStatement = ConnectionUtils.getConnect(connection).prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                User user = new User();
+                user.setId(resultSet.getInt("id"));
+                user.setUsername(resultSet.getString("username"));
+                user.setName(resultSet.getString("name"));
+                user.setSex(resultSet.getString("sex"));
+                user.setPassword(resultSet.getString("password"));
+                user.setPhone(resultSet.getString("phone"));
+                user.setEmail(resultSet.getString("email"));
+                user.setAddress(resultSet.getString("address"));
+                returnList.add(user);
+            }
+            preparedStatement.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return returnList;
     }
 }

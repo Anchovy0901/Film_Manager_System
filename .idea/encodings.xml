@@ -3,6 +3,16 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/src/dao/UserDao.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/dao/impl/UserDaoImpl.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/entity/Actor.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/entity/Admin.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/entity/Awards.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/entity/Cineplex.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/entity/DiscountCard.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/entity/Film.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/entity/FilmSchedule.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/entity/MovieHall.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/entity/Order.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/entity/User.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/ui/Login.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/utils/CloneUtils.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/utils/ConnectionUtils.java" charset="UTF-8" />
