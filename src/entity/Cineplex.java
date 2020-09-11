@@ -29,4 +29,9 @@ public class Cineplex {
      * 特色服务
      */
     private String characteristicService;
+
+    /**
+     * 影城名称
+     */
+    private String name;
 }
