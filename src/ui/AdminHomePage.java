@@ -5,6 +5,8 @@
 package ui;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
@@ -72,6 +74,14 @@ public class AdminHomePage {
         actor.setText("\u6f14\u5458\u7ba1\u7406");
         contentPane.add(actor);
         actor.setBounds(new Rectangle(new Point(185, 160), actor.getPreferredSize()));
+
+        cineplex.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new CineplexHomePage();
+                jFrame.dispose();
+            }
+        });
 
         {
             // compute preferred size

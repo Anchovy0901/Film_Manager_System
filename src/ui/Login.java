@@ -61,7 +61,7 @@ public class Login {
             password.setBounds(100, 115, 165, password.getPreferredSize().height);
 
             //----- forget ------
-            forget.setText("忘记密码");
+            forget.setText("forget");
             llContentPane.add(forget);
             forget.setBounds(new Rectangle(new Point(245, 143), l2.getPreferredSize()));
             forget.setSize(60, 20);

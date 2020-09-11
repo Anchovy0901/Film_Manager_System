@@ -11,7 +11,7 @@
  Target Server Version : 50731
  File Encoding         : 65001
 
- Date: 09/09/2020 16:38:09
+ Date: 11/09/2020 23:28:13
 */
 
 SET NAMES utf8mb4;
@@ -105,8 +105,14 @@ CREATE TABLE `f_cineplex`  (
   `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '影城地址',
   `phone` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '联系电话',
   `characteristic_service` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '特色服务',
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '影城名称',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '影城信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '影城信息表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of f_cineplex
+-- ----------------------------
+INSERT INTO `f_cineplex` VALUES (4, '万达', '万达广场', '123456', '万达', '万达');
 
 -- ----------------------------
 -- Table structure for f_discount_card
@@ -161,11 +167,11 @@ CREATE TABLE `f_movie_hall`  (
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '影厅名称',
   `cineplex_id` int(11) NULL DEFAULT NULL COMMENT '影城编号',
   `table_num` int(11) NULL DEFAULT NULL COMMENT '座位数',
-  `i_max` tinyint(1) NULL DEFAULT NULL COMMENT '是否坐满',
+  `i_max` tinyint(1) NULL DEFAULT 0 COMMENT '是否坐满',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `cineplex_id`(`cineplex_id`) USING BTREE,
   CONSTRAINT `f_movie_hall_ibfk_1` FOREIGN KEY (`cineplex_id`) REFERENCES `f_cineplex` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '影厅信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '影厅信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for f_order
@@ -233,7 +239,7 @@ CREATE TABLE `f_user`  (
   `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '邮箱',
   `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '地址',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of f_user

@@ -4,14 +4,20 @@
 
 package ui;
 
+import dao.CineplexDao;
+import dao.impl.CineplexDaoImpl;
+import entity.Cineplex;
+
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
  * @author unknown
  */
-public class Cineplex extends JFrame {
-    public Cineplex() {
+public class CineplexInsert {
+    public CineplexInsert() {
         initComponents();
     }
 
@@ -30,9 +36,10 @@ public class Cineplex extends JFrame {
         label5 = new JLabel();
         characteristicService = new JTextField();
         id = new JLabel();
+        jFrame = new JFrame();
 
         //======== this ========
-        Container contentPane = getContentPane();
+        Container contentPane = jFrame.getContentPane();
         contentPane.setLayout(null);
 
         //---- label1 ----
@@ -77,6 +84,41 @@ public class Cineplex extends JFrame {
         contentPane.add(id);
         id.setBounds(330, 30, 30, 20);
 
+        insert.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(name.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null, "影城名称不能为空");
+                }
+                if(address.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null, "影城地址不能为空");
+                }
+                if(remark.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null, "内容不能为空");
+                }
+                if(phone.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null, "联系方式不能为空");
+                }
+                if(characteristicService.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null, "特色服务不能为空");
+                }
+                CineplexDao cineplexDao = new CineplexDaoImpl();
+                Cineplex cineplex1 = cineplexDao.queryName(name.getText());
+                if(cineplex1 == null){
+                    JOptionPane.showMessageDialog(null, "影城名称已经存在");
+                }
+                entity.Cineplex cineplex = new entity.Cineplex();
+                cineplex.setName(name.getText());
+                cineplex.setAddress(address.getText());
+                cineplex.setRemark(remark.getText());
+                cineplex.setPhone(phone.getText());
+                cineplex.setCharacteristicService(characteristicService.getText());
+                cineplexDao.add(cineplex);
+                new CineplexHomePage();
+                jFrame.dispose();
+            }
+        });
+
         {
             // compute preferred size
             Dimension preferredSize = new Dimension();
@@ -91,8 +133,9 @@ public class Cineplex extends JFrame {
             contentPane.setMinimumSize(preferredSize);
             contentPane.setPreferredSize(preferredSize);
         }
-        pack();
-        setLocationRelativeTo(getOwner());
+        jFrame.pack();
+        jFrame.setVisible(true);
+        jFrame.setLocationRelativeTo(jFrame.getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
@@ -110,5 +153,6 @@ public class Cineplex extends JFrame {
     private JLabel label5;
     private JTextField characteristicService;
     private JLabel id;
+    private JFrame jFrame;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
