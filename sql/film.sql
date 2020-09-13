@@ -11,7 +11,7 @@
  Target Server Version : 50731
  File Encoding         : 65001
 
- Date: 12/09/2020 19:55:37
+ Date: 13/09/2020 21:55:55
 */
 
 SET NAMES utf8mb4;
@@ -26,7 +26,7 @@ CREATE TABLE `f_actor`  (
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '演员名称',
   `sex` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '性别',
   `nation` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '国家',
-  `birthday` date NULL DEFAULT NULL COMMENT '生日',
+  `birthday` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '生日',
   `remark` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '从影经历',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '演员表' ROW_FORMAT = Dynamic;
@@ -54,9 +54,9 @@ INSERT INTO `f_admin` VALUES (1, 'admin', 'admin', '王五');
 DROP TABLE IF EXISTS `f_awards`;
 CREATE TABLE `f_awards`  (
   `id` int(11) NOT NULL COMMENT '奖项编号',
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '奖项名称',
-  `periods` int(11) NULL DEFAULT NULL COMMENT '期数',
-  `year` int(11) NULL DEFAULT NULL COMMENT '获奖年份',
+  `awards_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '奖项名称',
+  `periods` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '期数',
+  `year` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '获奖年份',
   `site` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '举办地点',
   `actor_id` int(11) NULL DEFAULT NULL COMMENT '演员编号',
   PRIMARY KEY (`id`) USING BTREE,
@@ -79,21 +79,6 @@ CREATE TABLE `f_car_user`  (
   CONSTRAINT `f_car_user_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `f_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `f_car_user_ibfk_2` FOREIGN KEY (`car_id`) REFERENCES `f_discount_card` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '折扣卡和用户关联表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for f_card_cineplex
--- ----------------------------
-DROP TABLE IF EXISTS `f_card_cineplex`;
-CREATE TABLE `f_card_cineplex`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `cineplex_id` int(11) NULL DEFAULT NULL COMMENT '影城id',
-  `card_id` int(11) NULL DEFAULT NULL COMMENT '会员卡id',
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `cineplex_id`(`cineplex_id`) USING BTREE,
-  INDEX `card_id`(`card_id`) USING BTREE,
-  CONSTRAINT `f_card_cineplex_ibfk_1` FOREIGN KEY (`cineplex_id`) REFERENCES `f_cineplex` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `f_card_cineplex_ibfk_2` FOREIGN KEY (`card_id`) REFERENCES `f_discount_card` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '影城则扣卡关联表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for f_cineplex
@@ -122,6 +107,8 @@ CREATE TABLE `f_discount_card`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '则扣卡编号',
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '折扣卡名称',
   `discount` decimal(11, 2) NULL DEFAULT NULL COMMENT '则扣',
+  `cineplex_id` int(11) NULL DEFAULT NULL COMMENT '影城id',
+  `price` decimal(10, 2) NULL DEFAULT NULL COMMENT '办卡金额',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '折扣卡表' ROW_FORMAT = Dynamic;
 
