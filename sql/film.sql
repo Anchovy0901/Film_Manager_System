@@ -11,7 +11,7 @@
  Target Server Version : 50731
  File Encoding         : 65001
 
- Date: 13/09/2020 21:55:55
+ Date: 14/09/2020 17:10:33
 */
 
 SET NAMES utf8mb4;
@@ -121,7 +121,12 @@ CREATE TABLE `f_film`  (
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '电影名称',
   `category` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '电影类型',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '电影表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '电影表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of f_film
+-- ----------------------------
+INSERT INTO `f_film` VALUES (1, '1', '1');
 
 -- ----------------------------
 -- Table structure for f_film_schedule
@@ -133,9 +138,8 @@ CREATE TABLE `f_film_schedule`  (
   `movie_hall_id` int(11) NULL DEFAULT NULL COMMENT '影厅编号',
   `film_id` int(11) NULL DEFAULT NULL COMMENT '电影编号',
   `ticket_rates` decimal(11, 2) NULL DEFAULT NULL COMMENT '票价',
-  `start_time` datetime(0) NULL DEFAULT NULL COMMENT '开映时间',
-  `end_time` datetime(0) NULL DEFAULT NULL COMMENT '结束时间',
-  `discount_card_id` int(11) NULL DEFAULT NULL COMMENT '折扣卡编号',
+  `start_time` bigint(22) NULL DEFAULT NULL COMMENT '开映时间',
+  `end_time` bigint(22) NULL DEFAULT NULL COMMENT '结束时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `cineplex_id`(`cineplex_id`) USING BTREE,
   INDEX `movie_hall_id`(`movie_hall_id`) USING BTREE,
