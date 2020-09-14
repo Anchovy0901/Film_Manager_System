@@ -10,6 +10,9 @@ import dao.PalmsDao;
 import dao.impl.ActorDaoImpl;
 import dao.impl.AwardsDaoImpl;
 import dao.impl.PalmsDaoImpl;
+import entity.Actor;
+import entity.Awards;
+import entity.Palms;
 
 import javax.swing.*;
 import java.awt.*;
@@ -180,7 +183,33 @@ public class ActorUpdate {
                 PalmsDao palmsDao = new PalmsDaoImpl(); //»ñ½±¼ÇÂ¼
                 AwardsDao awardsDao = new AwardsDaoImpl(); //½±Ïî
 
+                Actor actor1 = new Actor();
+                actor1.setId(id);
+                actor1.setName(name.getText());
+                actor1.setSex(sex.getText());
+                actor1.setNation(nation.getText());
+                actor1.setBirthday(birthday.getText());
+                actor1.setRemark(remark.getText());
+                actorDao.edit(actor1);
 
+                palmsDao.delete(id);
+                awardsDao.delete(id);
+
+                Palms palms = new Palms();
+                palms.setActorId(actor1.getId());
+                palms.setCategory(category.getText());
+                palms.setLevel(level.getText());
+                palmsDao.add(palms);
+                //Awards
+                Awards awards = new Awards();
+                awards.setAwardsName(awardsName.getText());
+                awards.setPeriods(periods.getText());
+                awards.setYear(year.getText());
+                awards.setSite(site.getText());
+                awards.setActorId(actor1.getId());
+                awardsDao.add(awards);
+                new ActorHomePage();
+                jFrame.dispose();
 
             }
         });

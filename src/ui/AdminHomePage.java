@@ -83,6 +83,64 @@ public class AdminHomePage {
             }
         });
 
+        user.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new UserList();
+                jFrame.dispose();
+            }
+        });
+
+        movieHall.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new MovieHallHomePage();
+                jFrame.dispose();
+            }
+        });
+
+        order.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new OrderList();
+                jFrame.dispose();
+            }
+        });
+        film.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new FilmHomePage();
+                jFrame.dispose();
+            }
+        });
+        order.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new OrderList();
+                jFrame.dispose();
+            }
+        });
+        discountCard.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new DiscountCardHomePage();
+                jFrame.dispose();
+            }
+        });
+        filmSchedule.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new FilmScheduleHomePage();
+                jFrame.dispose();
+            }
+        });
+        actor.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ActorHomePage();
+                jFrame.dispose();
+            }
+        });
         {
             // compute preferred size
             Dimension preferredSize = new Dimension();

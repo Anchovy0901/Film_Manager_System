@@ -36,15 +36,66 @@ public class FilmSchedule {
     /**
      * 开映时间
      */
-    private LocalDateTime startTime;
+    private Long startTime;
 
     /**
      * 结束时间
      */
-    private LocalDateTime endTime;
+    private Long endTime;
 
-    /**
-     * 折扣卡编号
-     */
-    private Integer discountCardId;
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getCineplexId() {
+        return cineplexId;
+    }
+
+    public void setCineplexId(Integer cineplexId) {
+        this.cineplexId = cineplexId;
+    }
+
+    public Integer getMovieHallId() {
+        return movieHallId;
+    }
+
+    public void setMovieHallId(Integer movieHallId) {
+        this.movieHallId = movieHallId;
+    }
+
+    public Integer getFilmId() {
+        return filmId;
+    }
+
+    public void setFilmId(Integer filmId) {
+        this.filmId = filmId;
+    }
+
+    public BigDecimal getTicketRates() {
+        return ticketRates;
+    }
+
+    public void setTicketRates(BigDecimal ticketRates) {
+        this.ticketRates = ticketRates;
+    }
+
+    public Long getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Long startTime) {
+        this.startTime = startTime;
+    }
+
+    public Long getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Long endTime) {
+        this.endTime = endTime;
+    }
 }

@@ -11,7 +11,7 @@
  Target Server Version : 50731
  File Encoding         : 65001
 
- Date: 14/09/2020 17:10:33
+ Date: 14/09/2020 20:43:13
 */
 
 SET NAMES utf8mb4;
@@ -29,7 +29,12 @@ CREATE TABLE `f_actor`  (
   `birthday` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '生日',
   `remark` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '从影经历',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '演员表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '演员表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of f_actor
+-- ----------------------------
+INSERT INTO `f_actor` VALUES (1, '王宝强', '男', NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for f_admin
@@ -65,6 +70,11 @@ CREATE TABLE `f_awards`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '奖项信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of f_awards
+-- ----------------------------
+INSERT INTO `f_awards` VALUES (1, '金奖', '1', '1', '北京', 1);
+
+-- ----------------------------
 -- Table structure for f_car_user
 -- ----------------------------
 DROP TABLE IF EXISTS `f_car_user`;
@@ -78,7 +88,12 @@ CREATE TABLE `f_car_user`  (
   INDEX `car_id`(`car_id`) USING BTREE,
   CONSTRAINT `f_car_user_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `f_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `f_car_user_ibfk_2` FOREIGN KEY (`car_id`) REFERENCES `f_discount_card` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '折扣卡和用户关联表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '折扣卡和用户关联表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of f_car_user
+-- ----------------------------
+INSERT INTO `f_car_user` VALUES (1, 1, 1, '2020-09-14 20:37:00');
 
 -- ----------------------------
 -- Table structure for f_cineplex
@@ -110,7 +125,12 @@ CREATE TABLE `f_discount_card`  (
   `cineplex_id` int(11) NULL DEFAULT NULL COMMENT '影城id',
   `price` decimal(10, 2) NULL DEFAULT NULL COMMENT '办卡金额',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '折扣卡表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '折扣卡表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of f_discount_card
+-- ----------------------------
+INSERT INTO `f_discount_card` VALUES (1, '打折卡', 5.00, 4, 11.00);
 
 -- ----------------------------
 -- Table structure for f_film
@@ -126,7 +146,7 @@ CREATE TABLE `f_film`  (
 -- ----------------------------
 -- Records of f_film
 -- ----------------------------
-INSERT INTO `f_film` VALUES (1, '1', '1');
+INSERT INTO `f_film` VALUES (1, '港囧', '1');
 
 -- ----------------------------
 -- Table structure for f_film_schedule
@@ -147,7 +167,12 @@ CREATE TABLE `f_film_schedule`  (
   CONSTRAINT `f_film_schedule_ibfk_1` FOREIGN KEY (`cineplex_id`) REFERENCES `f_cineplex` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `f_film_schedule_ibfk_2` FOREIGN KEY (`movie_hall_id`) REFERENCES `f_movie_hall` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `f_film_schedule_ibfk_3` FOREIGN KEY (`film_id`) REFERENCES `f_film` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '电影排片表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '电影排片表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of f_film_schedule
+-- ----------------------------
+INSERT INTO `f_film_schedule` VALUES (1, 4, 1, 1, 10.00, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for f_movie_hall
@@ -162,7 +187,12 @@ CREATE TABLE `f_movie_hall`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `cineplex_id`(`cineplex_id`) USING BTREE,
   CONSTRAINT `f_movie_hall_ibfk_1` FOREIGN KEY (`cineplex_id`) REFERENCES `f_cineplex` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '影厅信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '影厅信息表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of f_movie_hall
+-- ----------------------------
+INSERT INTO `f_movie_hall` VALUES (1, '万达影厅', 4, 10, 0);
 
 -- ----------------------------
 -- Table structure for f_order
@@ -183,7 +213,12 @@ CREATE TABLE `f_order`  (
   CONSTRAINT `f_order_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `f_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `f_order_ibfk_2` FOREIGN KEY (`cineples_id`) REFERENCES `f_cineplex` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `f_order_ibfk_3` FOREIGN KEY (`movie_hall_id`) REFERENCES `f_movie_hall` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '订单表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '订单表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of f_order
+-- ----------------------------
+INSERT INTO `f_order` VALUES (1, 1, 4, 1, 10.00, 10.00, '10');
 
 -- ----------------------------
 -- Table structure for f_palms
@@ -197,7 +232,12 @@ CREATE TABLE `f_palms`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `actor_id`(`actor_id`) USING BTREE,
   CONSTRAINT `f_palms_ibfk_1` FOREIGN KEY (`actor_id`) REFERENCES `f_actor` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '获奖记录表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '获奖记录表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of f_palms
+-- ----------------------------
+INSERT INTO `f_palms` VALUES (1, 1, '白银', '2');
 
 -- ----------------------------
 -- Table structure for f_pay
@@ -214,7 +254,12 @@ CREATE TABLE `f_pay`  (
   INDEX `actor_id`(`actor_id`) USING BTREE,
   CONSTRAINT `f_pay_ibfk_1` FOREIGN KEY (`film_id`) REFERENCES `f_film` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `f_pay_ibfk_2` FOREIGN KEY (`actor_id`) REFERENCES `f_actor` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '演员出演记录表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '演员出演记录表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of f_pay
+-- ----------------------------
+INSERT INTO `f_pay` VALUES (1, 1, 1, '1', '1');
 
 -- ----------------------------
 -- Table structure for f_user
